@@ -1,0 +1,1 @@
+# jcszr8-materialy-eventy-delegaty-i-programowanie-funkcyjne-w-c-
