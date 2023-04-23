@@ -5,7 +5,7 @@ public class ClassUsingDelegate
     public ClassUsingDelegate()
     {}
 
-    public void DoSomething(SomethingToDo somethingToDo)
+    public void DoSomething(Action somethingToDo)
     {
         somethingToDo();
     }
