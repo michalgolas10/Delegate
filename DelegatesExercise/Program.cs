@@ -65,26 +65,27 @@ public class Program
 
         var selection = Console.ReadKey();
 
-        // TODO
+        Comparison<Car> comparison;
+
         switch (selection.KeyChar)
         {
             case '1':
-                // tu czegos brakuje
+                comparison = (car1, car2) => car1.Manufacturer.CompareTo(car2.Manufacturer);
                 break;
             case '2':
-                // tu czegos brakuje
+                comparison = (car1, car2) => car1.Model.CompareTo(car2.Model);
                 break;
             case '3':
-                // tu czegos brakuje
+                comparison = (car1, car2) => car1.ProductionYear.CompareTo(car2.ProductionYear);
                 break;
             case '4':
-                // tu czegos brakuje
+                comparison = (car1, car2) => car1.EngineVolumeInCubicCentimeters.CompareTo(car2.EngineVolumeInCubicCentimeters);
                 break;
             default:
                 throw new NotImplementedException();
         };
 
-        OutputCarsToConsole(_carService.ApplySortUsingComparison(...)); // tu czegos brakuje
+        OutputCarsToConsole(_carService.ApplySortUsingComparison(comparison));
     }
 
     private static void ListCarsWhere()
@@ -97,25 +98,27 @@ public class Program
 
         var selection = Console.ReadKey();        
 
+        Predicate<Car> predicate;
+
         switch (selection.KeyChar)
         {
             case '1':
-                // tu czegos brakuje
+                predicate = (car) => car.Manufacturer.Equals("Ford", StringComparison.CurrentCultureIgnoreCase);
                 break;
             case '2':
-                // tu czegos brakuje
+                predicate = (car) => car.Model.StartsWith("c", StringComparison.InvariantCultureIgnoreCase);
                 break;
             case '3':
-                // tu czegos brakuje
+                predicate = (car) => car.ProductionYear < 2000;
                 break;
             case '4':
-                // tu czegos brakuje
+                predicate = (car) => car.EngineVolumeInCubicCentimeters > 2000;
                 break;
             default:
                 throw new NotImplementedException();
         };
 
-        OutputCarsToConsole(_carService.ApplyWherePredicate(...); // tu czegos brakuje
+        OutputCarsToConsole(_carService.ApplyWherePredicate(predicate));
     }
 
     private static void ListCarsSelectProperty()
@@ -126,21 +129,23 @@ public class Program
         Console.WriteLine("[3] ...productionYear");
         Console.WriteLine("[4] ...engineVolumeInCubicCentimeters");
 
-        var selection = Console.ReadKey();        
+        var selection = Console.ReadKey();
+
+        Converter<Car, string> converter;
 
         switch (selection.KeyChar)
         {
             case '1':
-                // tu czegos brakuje
+                converter = (car) => car.Manufacturer;
                 break;
             case '2':
-                // tu czegos brakuje
+                converter = (car) => car.Model;
                 break;
             case '3':
-                // tu czegos brakuje
+                converter = (car) => car.ProductionYear.ToString();
                 break;
             case '4':
-                // tu czegos brakuje
+                converter = (car) => car.EngineVolumeInCubicCentimeters.ToString();
                 break;
             default:
                 throw new NotImplementedException();
@@ -148,7 +153,7 @@ public class Program
 
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine();
-        foreach (var item in _carService.ApplyConversion(...) // tu czegos brakuje
+        foreach (var item in _carService.ApplyConversion(converter))
         {
             Console.WriteLine(item);
             Console.WriteLine($"########################################");
